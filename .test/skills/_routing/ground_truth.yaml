@@ -253,6 +253,40 @@ test_cases:
       difficulty: "medium"
       reasoning: "'fastapi react' triggers APX, bare 'fastapi' also triggers app-python. Router picks best fit."
 
+  # Single-skill routing - Many Model Forecasting
+  - id: "routing_mmf_001"
+    inputs:
+      prompt: "Run many model forecasting on my sales data"
+    expectations:
+      expected_skills: ["many-model-forecasting"]
+      is_multi_skill: false
+    metadata:
+      category: "single_skill"
+      difficulty: "easy"
+      reasoning: "Mentions 'many model forecasting' - clear MMF trigger"
+
+  - id: "routing_mmf_002"
+    inputs:
+      prompt: "Set up a time series forecasting pipeline with StatsForecast models"
+    expectations:
+      expected_skills: ["many-model-forecasting"]
+      is_multi_skill: false
+    metadata:
+      category: "single_skill"
+      difficulty: "easy"
+      reasoning: "Mentions 'time series forecasting' and 'StatsForecast' - MMF triggers"
+
+  - id: "routing_mmf_003"
+    inputs:
+      prompt: "Train Chronos foundation models on my energy consumption data"
+    expectations:
+      expected_skills: ["many-model-forecasting"]
+      is_multi_skill: false
+    metadata:
+      category: "single_skill"
+      difficulty: "easy"
+      reasoning: "Mentions 'Chronos' - MMF foundation model trigger"
+
   # No skill match
   - id: "routing_no_match_001"
     inputs:

@@ -75,6 +75,16 @@ SKILL_TRIGGERS = {
     ],
     "databricks-lakebase-provisioned": ["lakebase", "postgresql", "postgres"],
     "databricks-model-serving": ["model serving", "serving endpoint", "inference endpoint"],
+    "many-model-forecasting": [
+        "many model forecasting",
+        "mmf",
+        "time series forecasting",
+        "forecasting pipeline",
+        "mmf_sa",
+        "statsforecast",
+        "neuralforecast",
+        "chronos",
+    ],
 }
 
 

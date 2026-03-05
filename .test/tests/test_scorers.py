@@ -150,6 +150,24 @@ class TestDetectSkillsFromPrompt:
         assert "databricks-app-python" in skills
         assert "databricks-model-serving" in skills
 
+    def test_detect_mmf(self):
+        """Test detection of many-model-forecasting skill."""
+        prompt = "Run many model forecasting on my sales data"
+        skills = detect_skills_from_prompt(prompt)
+        assert "many-model-forecasting" in skills
+
+    def test_detect_mmf_time_series(self):
+        """Test detection via time series forecasting keyword."""
+        prompt = "Set up a time series forecasting pipeline"
+        skills = detect_skills_from_prompt(prompt)
+        assert "many-model-forecasting" in skills
+
+    def test_detect_mmf_chronos(self):
+        """Test detection via Chronos model keyword."""
+        prompt = "Run Chronos foundation models on my data"
+        skills = detect_skills_from_prompt(prompt)
+        assert "many-model-forecasting" in skills
+
     def test_detect_no_match(self):
         """Test no skills detected for unrelated prompt."""
         prompt = "What is the weather today?"
@@ -180,6 +198,7 @@ class TestSkillTriggers:
             "databricks-agent-bricks",
             "databricks-lakebase-provisioned",
             "databricks-model-serving",
+            "many-model-forecasting",
         ]
         for skill in expected_skills:
             assert skill in SKILL_TRIGGERS
