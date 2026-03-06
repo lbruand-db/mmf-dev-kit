@@ -5,7 +5,7 @@
 
 # COMMAND ----------
 
-# MAGIC %pip install "mmf_sa{pip_extras} @ git+https://github.com/databricks-industry-solutions/many-model-forecasting.git@v0.1.0" --quiet
+# MAGIC %pip install "mmf_sa{pip_extras} @ git+https://github.com/databricks-industry-solutions/many-model-forecasting.git@v0.1.2" --quiet
 
 # COMMAND ----------
 
