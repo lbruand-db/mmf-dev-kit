@@ -18,6 +18,10 @@ The Many-Model Forecasting skill teaches AI assistants how to:
 - Run **Chronos** foundation models for zero-shot forecasting
 - Orchestrate many-model training across Databricks clusters
 
+## Prerequisites
+
+This skill depends on the **Databricks MCP tools** (e.g., `connect_to_workspace`, `execute_parameterized_sql`) provided by [`ai-dev-kit`](https://github.com/databricks-solutions/ai-dev-kit). Make sure the Databricks MCP server from `ai-dev-kit` is configured in your AI coding tool before using the skill.
+
 ## Installing the Skill into Your Project
 
 Clone this repo and run `install.py` to copy the skill files and configure your AI coding tools:
@@ -68,6 +72,4 @@ uv run --extra dev python scripts/run_eval.py many-model-forecasting
 
 ## License
 
-(c) 2026 Databricks, Inc. All rights reserved.
-
-The source in this project is provided subject to the [Databricks License](https://databricks.com/db-license-source). See [LICENSE.md](LICENSE.md) for details.
+Copyright 2026 Databricks, Inc. Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0). See [LICENSE](LICENSE) for details.
