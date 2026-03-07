@@ -161,10 +161,10 @@ testing skill logic without hitting Databricks.
    - `mmf-agent/test/tier1/conftest.py` → `.test/tests/tier1/conftest.py`
 
 4. Wire the mock DuckDB executor into the existing `skill_test` framework as an
-   alternative execution backend (alongside the real Databricks executor).
+   alternative execution backend (alongside the real Databricks executor). Make sure
+   it is easy to merge this part to maintain the branch as it is going 
 
-5. Add a CI job that runs tier 1 tests (requires `DATABRICKS_TOKEN` secret for
-   the agent loop).
+5. No integration of the tier 1 tests in the CICD, as they would cost too much to run.
 
 **Result:** ~14 skill-logic tests that verify SQL generation, cluster configs,
 and notebook params using an in-memory DuckDB backend.

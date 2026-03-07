@@ -17,10 +17,20 @@ dependencies = [
 [project.optional-dependencies]
 databricks = ["databricks-sdk>=0.20.0"]
 dev = ["pytest>=8.0", "pytest-asyncio>=0.23"]
+tier1 = [
+    "pytest>=8.0",
+    "duckdb",
+    "openai",
+    "sqlglot>=28.0",
+    "pytz",
+    "python-dotenv",
+    "numpy",
+    "pandas",
+]
 optimize = ["gepa>=0.1.0", "tiktoken>=0.7.0"]
 # judges group: install separately when mlflow-deepeval/mlflow-ragas are published
 # judges = ["mlflow-deepeval>=0.1.0", "mlflow-ragas>=0.1.0"]
-all = ["skill-test[databricks,dev,optimize]"]
+all = ["skill-test[databricks,dev,optimize,tier1]"]
 
 [project.scripts]
 skill-test = "skill_test.cli:main"
@@ -32,3 +42,7 @@ packages = ["src/skill_test"]
 testpaths = ["tests"]
 pythonpath = ["src"]
 asyncio_mode = "auto"
+markers = [
+    "tier1: Tier 1 skill logic tests (require DATABRICKS_TOKEN, use DuckDB mock backend)",
+    "tier2: Tier 2 workspace integration tests (require live Databricks workspace)",
+]
