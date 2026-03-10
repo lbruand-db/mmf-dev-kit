@@ -26,21 +26,24 @@ This skill depends on the **Databricks MCP tools** (e.g., `connect_to_workspace`
 
 ## Installing the Skill into Your Project
 
-Clone this repo and run `install.py` to copy the skill files and configure your AI coding tools:
+Download `install.py` and run it — no need to clone the entire repo:
 
 ```bash
-git clone <this-repo-url> mmf-dev-kit
-cd mmf-dev-kit
+curl -O https://raw.githubusercontent.com/lbruand-db/mmf-dev-kit/main/install.py
+python3 install.py --target /path/to/your-project
+```
 
-# Install into your project (configures Claude Code, Cursor, and Gemini CLI)
-python install.py --target /path/to/your-project
+The installer downloads the skill files from GitHub automatically and configures your AI coding tools (Claude Code, Cursor, Gemini CLI).
 
+```bash
 # Preview what will be created
-python install.py --target /path/to/your-project --dry-run
+python3 install.py --target /path/to/your-project --dry-run
 
 # Configure only specific tools
-python install.py --target /path/to/your-project --tools claude cursor
+python3 install.py --target /path/to/your-project --tools claude cursor
 ```
+
+If you already have the repo cloned, it uses the local files instead of downloading.
 
 After installation your project will contain:
 

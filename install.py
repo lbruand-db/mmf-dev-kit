@@ -13,7 +13,10 @@ Usage:
 import argparse
 import shutil
 import sys
+import tempfile
 from pathlib import Path
+from urllib.request import urlopen
+from urllib.error import URLError
 
 SKILL_DIR = "databricks-skills/many-model-forecasting"
 SKILL_FILES = [
@@ -26,6 +29,7 @@ SKILL_FILES = [
 ]
 MARKER = "<!-- mmf-dev-kit:skills -->"
 ALL_TOOLS = ["claude", "cursor", "gemini"]
+REPO_RAW_URL = "https://raw.githubusercontent.com/lbruand-db/mmf-dev-kit/main"
 
 SKILL_REFERENCE_BLOCK = """\
 ## Many-Model Forecasting Skill
@@ -63,12 +67,26 @@ Read these files to learn the patterns before starting any forecasting task:
 
 
 def resolve_source_dir() -> Path:
-    """Find skill source files relative to this script."""
+    """Find skill source files relative to this script, or download from GitHub."""
     source = Path(__file__).resolve().parent / SKILL_DIR
-    if not source.is_dir():
-        print(f"Error: source skill directory not found: {source}", file=sys.stderr)
-        sys.exit(1)
-    return source
+    if source.is_dir() and any(source.iterdir()):
+        return source
+
+    # Running standalone (e.g. downloaded install.py only) — fetch from GitHub
+    print("Skill files not found locally, downloading from GitHub...")
+    tmp = Path(tempfile.mkdtemp(prefix="mmf-dev-kit-"))
+    skill_tmp = tmp / SKILL_DIR
+    skill_tmp.mkdir(parents=True)
+    for name in SKILL_FILES:
+        url = f"{REPO_RAW_URL}/{SKILL_DIR}/{name}"
+        try:
+            data = urlopen(url).read()
+        except URLError as e:
+            print(f"Error: failed to download {url}: {e}", file=sys.stderr)
+            sys.exit(1)
+        (skill_tmp / name).write_bytes(data)
+        print(f"  downloaded: {name}")
+    return skill_tmp
 
 
 def copy_skill_files(src: Path, tgt: Path, dry_run: bool) -> list[str]:
